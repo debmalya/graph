@@ -51,7 +51,7 @@ public class BirthdayParty {
 			Iterator<Entry<Integer, List<Integer>>> dependencyIterator = dependencyEntrySet.iterator();
 			while (dependencyIterator.hasNext()) {
 				Entry<Integer, List<Integer>> nextEntry = dependencyIterator.next();
-				System.out.println(nextEntry.getValue());
+				
 				minimumDependency = Math.min(minimumDependency, nextEntry.getValue().size()+1);
 			}
 			System.out.println(minimumDependency);

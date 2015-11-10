@@ -49,7 +49,7 @@ public class TaleOfCities {
 					cityConnectivity(result, i, connectedCityMap, y, x);
 
 				}
-				// scanner.nextLine();
+				
 			}
 
 			for (int i = 0; i < T; i++) {

@@ -67,6 +67,7 @@ public class TaleOfCities {
 		}
 		if (!cityOne.contains(y)) {
 			cityOne.add(y);
+			// Added 1 for the city itself.
 			result[i] = Math.max(result[i], cityOne.size() + 1);
 		}
 		connectedCityMap.put(x, cityOne);

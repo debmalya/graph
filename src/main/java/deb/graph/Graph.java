@@ -27,7 +27,10 @@ public class Graph {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		try (Scanner scanner = new Scanner(System.in)) {
+			Graph g = new Graph(scanner);
+			System.out.println(g);
+		}
 
 	}
 
@@ -44,6 +47,7 @@ public class Graph {
 
 		vertices = numberOfVertices;
 
+		adj = new ArrayList[numberOfVertices];
 		for (int i = 0; i < numberOfVertices; i++) {
 			adj[i] = new ArrayList<Integer>();
 		}
@@ -58,12 +62,14 @@ public class Graph {
 		this(scanner.nextInt());
 
 		int edges = scanner.nextInt();
+		scanner.nextLine();
 		if (edges < 1) {
 			throw new IllegalArgumentException("Edges must be greater than 0.");
 		}
 		for (int i = 0; i < edges; i++) {
-			int v = scanner.nextInt();
-			int w = scanner.nextInt();
+			String[] values = scanner.nextLine().split(" ");
+			int v = Integer.parseInt(values[0]);
+			int w = Integer.parseInt(values[1]);
 			
 			addEdge(v,w);
 		}
@@ -104,10 +110,26 @@ public class Graph {
 	@Override
 	public String toString() {
 		StringBuilder aboutMe = new StringBuilder();
+		
+		String NEWLINE = System.getProperty("line.separator");
+		
+		// print number of vertices
+		aboutMe.append("Number of vertices :");
+		aboutMe.append(this.vertices);
+		aboutMe.append(NEWLINE);
+		
+		// print number of edges
+		aboutMe.append("Number of edges :");
+		aboutMe.append(this.edges);
+		aboutMe.append(NEWLINE);
+		
 		for (int i = 0; i < vertices; i++) {
-			for (int j = 0; j < adj[i].size(); j++) {
-				aboutMe.append(i+" - " + adj[i].get(j)+"\n");
-			}
+			
+				aboutMe.append(i);
+				aboutMe.append(" - ");
+				aboutMe.append(adj[i]);
+				aboutMe.append(NEWLINE);
+			
 		}
 		return aboutMe.toString();
 	}

@@ -27,7 +27,7 @@ public class GraphOrTree {
 		String[] degrees = scanner.nextLine().split(" ");
 		for (int i = 0; i < degrees.length; i++) {
 			int d = Integer.parseInt(degrees[i]);
-			if (d< 1 && d > 2) {
+			if (d > 2) {
 				System.out.println("No");
 				System.exit(0);
 			}

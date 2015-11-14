@@ -28,9 +28,9 @@ public class StringUtil {
 	 */
 	public static String longestCommonPrefix(String first, String second) {
 		int m = Math.min(first.length(), second.length());
-		for (int i = m - 1; i > -1; i--) {
+		for (int i = 0; i < m; i++) {
 			if (first.charAt(i) != second.charAt(i)) {
-				return first.substring(0, i - 1);
+				return first.substring(0, i);
 			}
 
 		}

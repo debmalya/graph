@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import deb.graph.common.Constant;
+
 /**
  * @author debmalyajash
  *
@@ -111,24 +113,24 @@ public class Graph {
 	public String toString() {
 		StringBuilder aboutMe = new StringBuilder();
 		
-		String NEWLINE = System.getProperty("line.separator");
+		
 		
 		// print number of vertices
 		aboutMe.append("Number of vertices :");
 		aboutMe.append(this.vertices);
-		aboutMe.append(NEWLINE);
+		aboutMe.append(Constant.NEWLINE);
 		
 		// print number of edges
 		aboutMe.append("Number of edges :");
 		aboutMe.append(this.edges);
-		aboutMe.append(NEWLINE);
+		aboutMe.append(Constant.NEWLINE);
 		
 		for (int i = 0; i < vertices; i++) {
 			
 				aboutMe.append(i);
 				aboutMe.append(" - ");
 				aboutMe.append(adj[i]);
-				aboutMe.append(NEWLINE);
+				aboutMe.append(Constant.NEWLINE);
 			
 		}
 		return aboutMe.toString();

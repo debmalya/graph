@@ -25,20 +25,29 @@ public class Organization {
 	 */
 	public static void main(String[] args) {
 		Organization organization = new Organization();
-		// T->A
+		// T->A (T reports to A)
 		organization.setBoss("T", "A");
-		// S->T
+		// S->T (S reports to T)
 		organization.setBoss("S", "T");
+		// D->S (D reports to S)
 		organization.setBoss("D", "S");
+		// G->T (G reports to T)
 		organization.setBoss("G", "T");
+		// F->G (F reports to G)
 		organization.setBoss("F", "G");
+		// K->I (K reports to I)
 		organization.setBoss("K", "I");
 
-		System.out.println("D - F :" + getCommonBoss("D", "F"));
-		System.out.println("D - S :" + getCommonBoss("D", "S"));
-		System.out.println("D - A :" + getCommonBoss("D", "A"));
-		System.out.println("D - T :" + getCommonBoss("D", "T"));
-		System.out.println("D - K :" + getCommonBoss("D", "K"));
+		// Reporting hierarchy
+		// D->S->T->A
+		// F->G->T->A
+		// K->I
+		System.out.println("Common boss of D and F :" + getCommonBoss("D", "F"));
+		System.out.println("Common boss of D and S :" + getCommonBoss("D", "S"));
+		System.out.println("Common boss of D and A :" + getCommonBoss("D", "A"));
+		System.out.println("Common boss of D and T :" + getCommonBoss("D", "T"));
+		// D and K do not have a common boss
+		System.out.println("Common boss of D nad K :" + getCommonBoss("D", "K"));
 
 	}
 

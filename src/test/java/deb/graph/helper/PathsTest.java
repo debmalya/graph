@@ -71,7 +71,7 @@ public class PathsTest {
 	 */
 	@Test
 	public final void testHasPathTo() {
-		Assert.assertFalse("There is no path between 0 and 4.",
+		Assert.assertFalse("There is no direct path between 0 and 4.",
 				paths.hasDirectPathTo(4));
 		Assert.assertTrue("There is path between 0 and 5.",
 				paths.hasDirectPathTo(5));
@@ -85,6 +85,24 @@ public class PathsTest {
 		Iterable<Integer> path = paths.pathTo(5);
 		Assert.assertNotNull(path);
 		Assert.assertTrue(path.iterator().hasNext());
+	}
+	
+	@Test
+	public final void testIndirectPathTo() {
+		Assert.assertFalse("There is no direct path between 0 and 4.",
+				paths.hasDirectPathTo(4));
+		Assert.assertFalse("There is no direct path between 0 and 7.",
+				paths.hasDirectPathTo(7));
+		Assert.assertFalse("There is no direct path between 0 and 8.",
+				paths.hasDirectPathTo(8));
+		Assert.assertFalse("There is no indirect path between 0 and 7.",
+				paths.hasIndirectPathTo(7));
+		Assert.assertFalse("There is no direct path between 0 and 8.",
+				paths.hasDirectPathTo(8));
+		Assert.assertFalse("There is no indirect path between 0 and 8.",
+				paths.hasIndirectPathTo(8));
+		Assert.assertTrue("There is indirect path between 0 and 4. 0->5->4",
+				paths.hasIndirectPathTo(4));
 	}
 
 }

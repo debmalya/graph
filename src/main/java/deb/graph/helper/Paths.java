@@ -29,7 +29,6 @@ public class Paths {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 
 	}
 
@@ -47,7 +46,7 @@ public class Paths {
 	}
 
 	/**
-	 * Is there a path from s to v ?
+	 * Is there a direct path from s to v ?
 	 * 
 	 * @param v
 	 *            - destination vertex.
@@ -56,11 +55,39 @@ public class Paths {
 	boolean hasDirectPathTo(int v) {
 		if (v > -1 && v <= graph.getVertices()) {
 			List<Integer> adjacency = graph.getAdj()[v];
-			for (int e : adjacency) {
-				if (e == source) {
+
+			if (adjacency.contains(source)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Is there a indirect path from s to v ?
+	 * 
+	 * @param v
+	 *            - destination vertex.
+	 * @return true if there is a path, false otherwise.
+	 */
+	boolean hasIndirectPathTo(int v) {
+
+		if (v > -1 && v <= graph.getVertices()) {
+			List<Integer> adjacency = graph.getAdj()[v];
+			for (Integer each : adjacency) {
+				if (graph.getAdj()[each].contains(source)) {
 					return true;
+				} else {
+					if (hasDirectPathTo(each)) {
+						// There is no direct path between source and v.
+						// But each is directly connected to source.
+						// v is connected to each.
+						// So there is indirect connection between source and v.
+						return true;
+					}
 				}
 			}
+
 		}
 		return false;
 	}

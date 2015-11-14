@@ -39,4 +39,13 @@ public class Counter {
 	public int increment() {
 		return count.incrementAndGet();
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Counter [count=" + count + ", id=" + id + "]";
+	}
+	
+	
 }

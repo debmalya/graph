@@ -18,7 +18,7 @@ public class CounterTest {
 	 */
 	@Test
 	public final void testTally() {
-		fail("Not yet implemented"); // TODO
+		
 	}
 
 }

@@ -23,6 +23,8 @@ public class HRTest {
 				"Just now created employee id 1,It should be existing",
 				hr.existingEmployee(1));
 		Assert.assertFalse("Employee id 0 does not exist",hr.existingEmployee(0));
+		Assert.assertNotNull(hr.getEmployee(1));
+		Assert.assertNull(hr.getEmployee(0));
 	}
 
 	/**

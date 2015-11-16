@@ -29,6 +29,81 @@ public class JobSchduler {
 	 *            list of job and with their dependencies.
 	 * @return scheduled job list.
 	 */
+	public List<Job> schedule1(List<Job> jobList) {
+		List<Job> scheduledJobs = new ArrayList<Job>();
+		
+		class DependentJob {
+			List<Job> mainJob;
+			String dependentJobName;
+		}
+		
+		class MainJob {
+			private Job mainJob;
+			private List<Job> dependentJobs;
+			
+			public void addDependentJobs(String jobName){
+				if (dependentJobs == null) {
+					dependentJobs = new ArrayList<Job>();
+				}
+				dependentJobs.add(new Job(jobName));
+			}
+
+			/**
+			 * @return the mainJob
+			 */
+			public Job getMainJob() {
+				return mainJob;
+			}
+
+			/**
+			 * @param mainJob the mainJob to set
+			 */
+			public void setMainJob(Job mainJob) {
+				this.mainJob = mainJob;
+			}
+		}
+
+		// Maintain a link for the dependent jobs.
+		// Key is the job (A)
+		// Value is a list of dependent jobs (B,C).
+		Map<Job, List<String>> jobDependency = new ConcurrentHashMap<Job, List<String>>(
+				jobList.size());
+		
+		Map<String,List<Job>> dependentJob = new ConcurrentHashMap<>();
+		
+		
+
+		for (Job eachJob : jobList) {
+			if (eachJob.getDeps() != null && !eachJob.getDeps().isEmpty()) {
+				// can create some dependency tree here
+				jobDependency.put(eachJob, eachJob.getDeps());
+				
+				
+			} else {
+				// This job does not have any dependency they can be added.
+				scheduledJobs.add(eachJob);
+			}
+		}
+
+		
+		return scheduledJobs;
+	}
+
+	/**
+	 * Takes a list of Jobs and puts them in an order that does not violate
+	 * dependencies. e.g. A -> B, C Job A has dependency on B and C. B -> D B
+	 * has dependency on D. C -> [] C has no dependency. D -> [] D has no
+	 * dependency. E -> [] E has no dependency. A valid schedule might be,
+	 * EDCBA, or DBCEA.
+	 * 
+	 * ABCDE is not valid.
+	 * 
+	 * @param jobList
+	 *            list of job and with their dependencies.
+	 * @return scheduled job list.
+	 * 
+	 * Below implementation will have performance issue if the list has lot of dependency.
+	 */
 	public List<Job> schedule(List<Job> jobList) {
 		List<Job> scheduledJobs = new ArrayList<Job>();
 
@@ -74,5 +149,4 @@ public class JobSchduler {
 
 		return scheduledJobs;
 	}
-
 }

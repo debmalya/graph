@@ -5,13 +5,21 @@ package deb.graph.application;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author debmalyajash
  *
  */
 public class HR {
+	
+	/**
+	 * This will maintain a map employee id as key
+	 * employee id of that person's boss as value.
+	 */
+	private Map<Integer,Integer> employeeMap = new ConcurrentHashMap<>();
 	/**
 	 * All employees in the organization.
 	 */

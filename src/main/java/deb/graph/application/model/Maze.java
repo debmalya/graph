@@ -3,24 +3,24 @@
  */
 package deb.graph.application.model;
 
-import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * 
- * @author debmalyajash
+ *
  */
 public class Maze {
+	
 	/**
-	 * 
+	 * Empty space indicator
 	 */
-	private static final char EMPTY_SPACE_INDICATOR = ' ';
+	public static final char EMPTY_SPACE = ' ';
 
 	/**
-	 * 'F' indicates finshing point.
+	 * 'F' indicates finishing point.
 	 */
-	private static final char FINISH_INDICATOR = 'F';
+	public static final char FINISH_INDICATOR = 'F';
 
 	/**
 	 * @return the width
@@ -39,33 +39,33 @@ public class Maze {
 	/**
 	 * @return the startingPoint
 	 */
-	public Point getStartingPoint() {
+	public MazePoint getStartingPoint() {
 		return startingPoint;
 	}
 
 	/**
 	 * @return the endPoint
 	 */
-	public Point getEndPoint() {
+	public MazePoint getEndPoint() {
 		return endPoint;
 	}
 
 	/**
 	 * @return the mazeBoard
 	 */
-	public boolean[][] getMazeBoard() {
+	public MazePoint[][] getMazeBoard() {
 		return mazeBoard;
 	}
 
 	/**
 	 * 'S' indicates starting point.
 	 */
-	private static final char START_INDICATOR = 'S';
+	public static final char START_INDICATOR = 'S';
 
 	/**
 	 * 'X' indicates wall.
 	 */
-	private static final char WALL_INDICATOR = 'X';
+	public static final char WALL_INDICATOR = 'X';
 
 	/**
 	 * Width of Maze.
@@ -80,27 +80,27 @@ public class Maze {
 	/**
 	 * Starting point of Maze
 	 */
-	private Point startingPoint;
+	private MazePoint startingPoint;
 
 	/**
 	 * End point of Maze.
 	 */
-	private Point endPoint;
+	private MazePoint endPoint;
 
 	/**
 	 * 
 	 */
-	private boolean[][] mazeBoard;
+	private MazePoint[][] mazeBoard;
 
 	/**
 	 * Locations where we have walls.
 	 */
-	private Set<Point> wallLocations = new HashSet<Point>();
+	private Set<MazePoint> wallLocations = new HashSet<>();
 
 	/**
 	 * Locations where we have empty spaces.
 	 */
-	private Set<Point> emptySpaces = new HashSet<Point>();
+	private Set<MazePoint> emptySpaces = new HashSet<>();
 
 	/**
 	 * This method will process the passed string and determine. Wall location.
@@ -115,22 +115,46 @@ public class Maze {
 		height = mazeDescription.length;
 		width = mazeDescription[0].length();
 
-		mazeBoard = new boolean[height][width];
+		mazeBoard = new MazePoint[height][width];
 
 		for (int x = 0; x < height; x++) {
 			for (int y = 0; y < width; y++) {
-				if (mazeDescription[x].charAt(y) == WALL_INDICATOR) {
+				char c = mazeDescription[x].charAt(y);
+
+				MazePoint point = new MazePoint(x, y, c);
+				mazeBoard[x][y] = point;
+
+				if (c == WALL_INDICATOR) {
 					// there is wall 'X'.
-					wallLocations.add(new Point(x, y));
-				} else if (mazeDescription[x].charAt(y) == START_INDICATOR) {
+					wallLocations.add(point);
+				} else if (c == START_INDICATOR) {
 					// Starting point.
-					startingPoint = new Point(x, y);
+					startingPoint = point;
 				} else if (mazeDescription[x].charAt(y) == FINISH_INDICATOR) {
 					// end point.
-					endPoint = new Point(x, y);
+					endPoint = point;
 				} else {
-					emptySpaces.add(new Point(x, y));
+					emptySpaces.add(point);
 				}
+
+				// update left,right neighbor.
+				// later this will be used for left right motion.
+				if (x - 1 > -1) {
+					// current one is at right side of it.
+					mazeBoard[x - 1][y].setRight(mazeBoard[x][y]);
+					// setting left neighbor of current one.
+					mazeBoard[x][y].setLeft(mazeBoard[x - 1][y]);
+				}
+
+				// update up,neighbor.
+				// later it will be used for backward and forward motion
+				if (y - 1 > -1) {
+					// current one is at beneath it.
+					mazeBoard[x][y - 1].setForward(mazeBoard[x][y]);
+					// in backward motion from current where it will reach
+					mazeBoard[x][y].setBackWard(mazeBoard[x][y - 1]);
+				}
+
 			}
 
 		}
@@ -140,18 +164,22 @@ public class Maze {
 	/**
 	 * @return the wallLocations
 	 */
-	public Set<Point> getWallLocations() {
+	public Set<MazePoint> getWallLocations() {
 		return wallLocations;
 	}
 
 	/**
 	 * @return the emptySpaces
 	 */
-	public Set<Point> getEmptySpaces() {
+	public Set<MazePoint> getEmptySpaces() {
 		return emptySpaces;
 	}
 
 	/**
+	 * What exists in the said location. is it wall ? is it free space? is it
+	 * starting point? it it finishing point?
+	 * 
+	 * To answer all these questions.
 	 * 
 	 * @param x
 	 *            x coordinate
@@ -160,15 +188,8 @@ public class Maze {
 	 * @return X - wall. ' ' - free space S - starting point F - end point
 	 */
 	public char whatExists(int x, int y) {
-		Point askingPoint = new Point(x, y);
-		if (wallLocations.contains(askingPoint)) {
-			return WALL_INDICATOR;
-		} else if (askingPoint.equals(startingPoint)) {
-			return START_INDICATOR;
-		} else if (endPoint.equals(startingPoint)) {
-			return FINISH_INDICATOR;
-		}
-		return EMPTY_SPACE_INDICATOR;
+
+		return mazeBoard[x][y].getValue();
 	}
 
 }

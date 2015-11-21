@@ -141,18 +141,18 @@ public class Maze {
 				// later this will be used for left right motion.
 				if (x - 1 > -1) {
 					// current one is at right side of it.
-					mazeBoard[x - 1][y].setRight(mazeBoard[x][y]);
+					mazeBoard[x - 1][y].setForward(mazeBoard[x][y]);
 					// setting left neighbor of current one.
-					mazeBoard[x][y].setLeft(mazeBoard[x - 1][y]);
+					mazeBoard[x][y].setBackWard(mazeBoard[x - 1][y]);
 				}
 
 				// update up,neighbor.
 				// later it will be used for backward and forward motion
 				if (y - 1 > -1) {
 					// current one is at beneath it.
-					mazeBoard[x][y - 1].setForward(mazeBoard[x][y]);
+					mazeBoard[x][y - 1].setRight(mazeBoard[x][y]);
 					// in backward motion from current where it will reach
-					mazeBoard[x][y].setBackWard(mazeBoard[x][y - 1]);
+					mazeBoard[x][y].setLeft(mazeBoard[x][y - 1]);
 				}
 
 			}

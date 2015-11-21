@@ -172,5 +172,44 @@ public class MazePoint {
 	public void setVisited(boolean visited) {
 		this.visited = visited;
 	}
+	
+	@Override
+    public String toString() {
+        StringBuilder aboutMe = new StringBuilder();
+        aboutMe.append("MazePoint {");
+        aboutMe.append(" x= ");
+        aboutMe.append(x);
+        aboutMe.append(", y= ");
+        aboutMe.append(y);
+        aboutMe.append(", value=");
+        aboutMe.append(value);
+        aboutMe.append(", visited=");
+        aboutMe.append(visited);
+
+        if (backWard != null) {
+            aboutMe.append(", backWard=");
+            aboutMe.append(backWard.getValue());
+        }
+
+        if (forward != null) {
+            aboutMe.append(", forward=");
+            aboutMe.append(forward.getValue());
+        }
+
+        if (left != null) {
+            aboutMe.append(", left=");
+            aboutMe.append(left.getValue());
+        }
+        
+        if (right != null) {
+            aboutMe.append(", right=");
+            aboutMe.append(right.getValue());
+        }
+        aboutMe.append(" }");
+
+        return aboutMe.toString();
+
+    }
+
 
 }

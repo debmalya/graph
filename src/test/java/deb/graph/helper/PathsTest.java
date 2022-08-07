@@ -63,6 +63,7 @@ public class PathsTest {
 	 */
 	@Test
 	public final void testPaths() {
+		setUp();
 		assertNotNull(paths);
 
 	}

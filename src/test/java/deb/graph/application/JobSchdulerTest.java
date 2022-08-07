@@ -3,12 +3,14 @@
  */
 package deb.graph.application;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author debmalyajash
@@ -31,8 +33,8 @@ public class JobSchdulerTest {
 		
 		JobSchduler scheduler = new JobSchduler();
 		List<Job> scheduledJobs = scheduler.schedule(jobList);
-		Assert.assertNotNull(scheduledJobs);
-		Assert.assertEquals(5, scheduledJobs.size());
+		assertNotNull(scheduledJobs);
+		assertEquals(5, scheduledJobs.size());
 		System.out.println(scheduledJobs);
 	}
 	

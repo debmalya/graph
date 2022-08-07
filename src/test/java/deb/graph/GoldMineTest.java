@@ -4,8 +4,9 @@
 package deb.graph;
 
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @author debmalyajash
@@ -22,37 +23,37 @@ public class GoldMineTest {
 		int[] A = new int[]{0,1,2,3,5};
 		
 		int actual = GoldMine.getMax(team.length - 1, team, A);
-		Assert.assertEquals(6, actual);
+		assertEquals(6, actual);
 		
 		team = new int[]{0,2,3,4,0};
 		A = new int[]{0,1,2,3,5};
 		actual = GoldMine.getMax(team.length - 1, team, A);
-		Assert.assertEquals(11, actual);
+		assertEquals(11, actual);
 		
 		team = new int[]{0,2,3,0,0};
 		A = new int[]{0,1,2,3,5};
 		actual = GoldMine.getMax(team.length - 1, team, A);
-		Assert.assertEquals(6, actual);
+		assertEquals(6, actual);
 		
 		team = new int[]{0,2,0,4,0};
 		A = new int[]{0,1,2,3,5};
 		actual = GoldMine.getMax(team.length - 1, team, A);
-		Assert.assertEquals(8, actual);
+		assertEquals(8, actual);
 		
 		team = new int[]{0,0,0,0,0};
 		A = new int[]{0,1,2,3,5};
 		actual = GoldMine.getMax(team.length - 1, team, A);
-		Assert.assertEquals(5, actual);
+		assertEquals(5, actual);
 		
 		team = new int[]{0,4,0,0,0};
 		A = new int[]{0,1,2,3,5};
 		actual = GoldMine.getMax(team.length - 1, team, A);
-		Assert.assertEquals(6, actual);
+		assertEquals(6, actual);
 		
 		team = new int[]{0,0,4,0,0};
 		A = new int[]{0,1,2,3,5};
 		actual = GoldMine.getMax(team.length - 1, team, A);
-		Assert.assertEquals(7, actual);
+		assertEquals(7, actual);
 	}
 
 }

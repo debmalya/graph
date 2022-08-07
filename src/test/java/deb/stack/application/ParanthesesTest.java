@@ -3,10 +3,10 @@
  */
 package deb.stack.application;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author debmalyajash
@@ -19,10 +19,10 @@ public class ParanthesesTest {
 	 */
 	@Test
 	public final void testIsProperlyBalanced() {
-		Assert.assertTrue(Parantheses.isProperlyBalanced("[()]{}{[()()]()}"));
-		Assert.assertFalse(Parantheses.isProperlyBalanced("[(]"));
-		Assert.assertFalse(Parantheses.isProperlyBalanced("[("));
-		Assert.assertTrue(Parantheses.isProperlyBalanced("[()]"));
+		assertTrue(Parantheses.isProperlyBalanced("[()]{}{[()()]()}"));
+		assertFalse(Parantheses.isProperlyBalanced("[(]"));
+		assertFalse(Parantheses.isProperlyBalanced("[("));
+		assertTrue(Parantheses.isProperlyBalanced("[()]"));
 	}
 
 }

@@ -3,9 +3,7 @@
  */
 package deb.counter;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author debmalyajash
@@ -18,7 +16,7 @@ public class CounterTest {
 	 */
 	@Test
 	public final void testTally() {
-		
+
 	}
 
 }

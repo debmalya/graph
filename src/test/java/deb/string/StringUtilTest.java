@@ -5,8 +5,9 @@ package deb.string;
 
 
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @author debmalyajash
@@ -20,7 +21,7 @@ public class StringUtilTest {
 	@Test
 	public final void testLongestCommonPrefix() {
 		String actual = StringUtil.longestCommonPrefix("prefetch", "prefix");
-		Assert.assertEquals("pref", actual);
+		assertEquals("pref", actual);
 	}
 
 }

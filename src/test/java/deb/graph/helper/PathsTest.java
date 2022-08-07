@@ -3,9 +3,12 @@
  */
 package deb.graph.helper;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import deb.graph.Graph;
 
@@ -33,7 +36,7 @@ public class PathsTest {
 	 */
 	private int source = 0;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		graph = new Graph(numberOfVertices);
 		graph.addEdge(0, 5);
@@ -56,13 +59,11 @@ public class PathsTest {
 	}
 
 	/**
-	 * Test method for
-	 * {@link deb.graph.helper.Paths#Paths(deb.graph.Graph, int)}.
+	 * Test method for {@link deb.graph.helper.Paths#Paths(deb.graph.Graph, int)}.
 	 */
 	@Test
 	public final void testPaths() {
-		Assert.assertNotNull(paths);
-		
+		assertNotNull(paths);
 
 	}
 
@@ -71,10 +72,8 @@ public class PathsTest {
 	 */
 	@Test
 	public final void testHasPathTo() {
-		Assert.assertFalse("There is no direct path between 0 and 4.",
-				paths.hasDirectPathTo(4));
-		Assert.assertTrue("There is path between 0 and 5.",
-				paths.hasDirectPathTo(5));
+		assertFalse(paths.hasDirectPathTo(4), "There is no direct path between 0 and 4.");
+		assertTrue(paths.hasDirectPathTo(5), "There is path between 0 and 5.");
 	}
 
 	/**
@@ -83,26 +82,19 @@ public class PathsTest {
 	@Test
 	public final void testPathTo() {
 		Iterable<Integer> path = paths.pathTo(5);
-		Assert.assertNotNull(path);
-		Assert.assertTrue(path.iterator().hasNext());
+		assertNotNull(path);
+		assertTrue(path.iterator().hasNext());
 	}
-	
+
 	@Test
 	public final void testIndirectPathTo() {
-		Assert.assertFalse("There is no direct path between 0 and 4.",
-				paths.hasDirectPathTo(4));
-		Assert.assertFalse("There is no direct path between 0 and 7.",
-				paths.hasDirectPathTo(7));
-		Assert.assertFalse("There is no direct path between 0 and 8.",
-				paths.hasDirectPathTo(8));
-		Assert.assertFalse("There is no indirect path between 0 and 7.",
-				paths.hasIndirectPathTo(7));
-		Assert.assertFalse("There is no direct path between 0 and 8.",
-				paths.hasDirectPathTo(8));
-		Assert.assertFalse("There is no indirect path between 0 and 8.",
-				paths.hasIndirectPathTo(8));
-		Assert.assertTrue("There is indirect path between 0 and 4. 0->5->4",
-				paths.hasIndirectPathTo(4));
+		assertFalse(paths.hasDirectPathTo(4), "There is no direct path between 0 and 4.");
+		assertFalse(paths.hasDirectPathTo(7), "There is no direct path between 0 and 7.");
+		assertFalse(paths.hasDirectPathTo(8), "There is no direct path between 0 and 8.");
+		assertFalse(paths.hasIndirectPathTo(7), "There is no indirect path between 0 and 7.");
+		assertFalse(paths.hasDirectPathTo(8), "There is no direct path between 0 and 8.");
+		assertFalse(paths.hasIndirectPathTo(8), "There is no indirect path between 0 and 8.");
+		assertTrue(paths.hasIndirectPathTo(4), "There is indirect path between 0 and 4. 0->5->4");
 	}
 
 }

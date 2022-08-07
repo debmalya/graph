@@ -3,8 +3,10 @@
  */
 package deb.graph.application.model;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @author debmalyajash
@@ -37,19 +39,19 @@ public class MazeTest {
 		Maze maze = new Maze(mazeBoard);
 		
 		// Test for starting point
-		Assert.assertEquals(3, (int)maze.getStartingPoint().getX());
-		Assert.assertEquals(3, (int)maze.getStartingPoint().getY());
+		assertEquals(3, (int)maze.getStartingPoint().getX());
+		assertEquals(3, (int)maze.getStartingPoint().getY());
 		
 		// Test for end point
-		Assert.assertEquals(14, (int)maze.getEndPoint().getX());
-		Assert.assertEquals(1, (int)maze.getEndPoint().getY());
+		assertEquals(14, (int)maze.getEndPoint().getX());
+		assertEquals(1, (int)maze.getEndPoint().getY());
 		
-		Assert.assertEquals(15, maze.getHeight());
-		Assert.assertEquals(15, maze.getWidth());
+		assertEquals(15, maze.getHeight());
+		assertEquals(15, maze.getWidth());
 		
 		// get walls
-		Assert.assertNotNull(maze.getWallLocations());
-		Assert.assertEquals(maze.getHeight()*maze.getWidth(), maze.getWallLocations().size()+maze.getEmptySpaces().size()+2);
+		assertNotNull(maze.getWallLocations());
+		assertEquals(maze.getHeight()*maze.getWidth(), maze.getWallLocations().size()+maze.getEmptySpaces().size()+2);
 		
 		
 		

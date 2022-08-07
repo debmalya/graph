@@ -3,8 +3,11 @@
  */
 package deb.graph.application.controller;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import org.junit.jupiter.api.Test;
 
 import deb.graph.application.model.Maze;
 import deb.graph.application.model.MazePoint;
@@ -24,43 +27,43 @@ public class MazeExplorerTest {
 
 	        // test whether maze populated correctly or not.
 	        MazePoint point = maze.getMazeBoard()[0][0];
-	        Assert.assertEquals('X', point.getValue());
-	        Assert.assertNull(point.getLeft());
+	        assertEquals('X', point.getValue());
+	        assertNull(point.getLeft());
 
-	        Assert.assertNotNull(point.getRight());
-	        Assert.assertEquals('X', point.getRight().getValue());
+	        assertNotNull(point.getRight());
+	        assertEquals('X', point.getRight().getValue());
 
-	        Assert.assertNotNull(point.getForward());
-	        Assert.assertEquals('X', point.getForward().getValue());
+	        assertNotNull(point.getForward());
+	        assertEquals('X', point.getForward().getValue());
 
-	        Assert.assertNull(point.getBackWard());
+	        assertNull(point.getBackWard());
 	        
 	        
 	        point = maze.getMazeBoard()[1][2];
-	        Assert.assertEquals(' ', point.getValue());
+	        assertEquals(' ', point.getValue());
 	        
 	        
 	        point = maze.getMazeBoard()[1][1];
 	        
-	        Assert.assertEquals('S', point.getValue());
-	        Assert.assertNotNull(point.getLeft());
-	        Assert.assertEquals('X',point.getLeft().getValue());
+	        assertEquals('S', point.getValue());
+	        assertNotNull(point.getLeft());
+	        assertEquals('X',point.getLeft().getValue());
 	        
-	        Assert.assertNotNull(point.getBackWard());
-	        Assert.assertEquals('X',point.getBackWard().getValue());
+	        assertNotNull(point.getBackWard());
+	        assertEquals('X',point.getBackWard().getValue());
 	        
-	        Assert.assertNotNull(point.getRight());
+	        assertNotNull(point.getRight());
 	        
-	        Assert.assertEquals(' ',point.getRight().getValue());
+	        assertEquals(' ',point.getRight().getValue());
 	        
-	        Assert.assertNotNull(point.getForward());
-	        Assert.assertEquals('X',point.getBackWard().getValue());
+	        assertNotNull(point.getForward());
+	        assertEquals('X',point.getBackWard().getValue());
 
 	        MazeExplorer explorer = new MazeExplorer(maze);
 	        explorer.explore();
 	       
-	        Assert.assertEquals("RRF", explorer.getPossiblePaths().get(0));
-	        Assert.assertEquals("RRF", explorer.getSuccessfulPaths().get(0));
+	        assertEquals("RRF", explorer.getPossiblePaths().get(0));
+	        assertEquals("RRF", explorer.getSuccessfulPaths().get(0));
 	}
 
 }

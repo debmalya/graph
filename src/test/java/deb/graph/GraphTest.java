@@ -4,8 +4,9 @@
 package deb.graph;
 
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @author debmalyajash
@@ -32,8 +33,8 @@ public class GraphTest {
 		graph.addEdge(9,11);
 		graph.addEdge(5,3);
 		
-		Assert.assertEquals(13, graph.getEdges());
-		Assert.assertEquals(13, graph.getVertices());
+		assertEquals(13, graph.getEdges());
+		assertEquals(13, graph.getVertices());
 		
 		System.out.println(graph);
 	}

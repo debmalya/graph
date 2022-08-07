@@ -3,12 +3,13 @@
  */
 package deb.graph;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author debmalyajash
@@ -28,7 +29,7 @@ public class TaleOfCitiesTest {
 		TaleOfCities.cityConnectivity(result,0, connectedCityMap, 2, 3);
 		TaleOfCities.cityConnectivity(result,0, connectedCityMap, 3, 2);
 		
-		Assert.assertEquals(3, result[0]);
+		assertEquals(3, result[0]);
 	}
 
 }

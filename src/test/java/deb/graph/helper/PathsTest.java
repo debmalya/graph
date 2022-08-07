@@ -72,6 +72,7 @@ public class PathsTest {
 	 */
 	@Test
 	public final void testHasPathTo() {
+		setUp();
 		assertFalse(paths.hasDirectPathTo(4), "There is no direct path between 0 and 4.");
 		assertTrue(paths.hasDirectPathTo(5), "There is path between 0 and 5.");
 	}
@@ -88,6 +89,7 @@ public class PathsTest {
 
 	@Test
 	public final void testIndirectPathTo() {
+		setUp();
 		assertFalse(paths.hasDirectPathTo(4), "There is no direct path between 0 and 4.");
 		assertFalse(paths.hasDirectPathTo(7), "There is no direct path between 0 and 7.");
 		assertFalse(paths.hasDirectPathTo(8), "There is no direct path between 0 and 8.");

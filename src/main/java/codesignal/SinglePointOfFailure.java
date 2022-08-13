@@ -1,5 +1,9 @@
 package codesignal;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class SinglePointOfFailure {
 	/**
 	 * Sue is a network administrator who consults for companies that have massive
@@ -36,7 +40,99 @@ public class SinglePointOfFailure {
 	 *         solution(connections) = 4.
 	 */
 	int solution(int[][] connections) {
-		return 0;
+		int noOfVertices = connections.length;
+		Graph graph = new Graph(noOfVertices);
+
+		for (int vertexIndex = 0; vertexIndex < noOfVertices; vertexIndex++) {
+			for (int connectionCount = 0; connectionCount < noOfVertices; connectionCount++) {
+				if (connections[vertexIndex][connectionCount] == 1) {
+					graph.addEdge(vertexIndex, connectionCount);
+				}
+			}
+		}
+
+		return graph.getNoOfSinglePointOfFailure();
+
+	}
+
+	class Graph {
+		private final int noOfVertices;
+		private final List<List<Integer>> adjacencyList;
+		private int noOfEdges;
+
+		/**
+		 * 
+		 * @param v - number of vertices
+		 */
+		public Graph(int v) {
+			noOfVertices = v;
+			adjacencyList = new ArrayList<>(noOfVertices);
+
+			for (int i = 0; i < noOfVertices; i++)
+				adjacencyList.add(new LinkedList<>());
+		}
+
+		public int getNoOfSinglePointOfFailure() {
+			System.out.printf("No of edges :%d\n", noOfEdges);
+			if (isCyclic()) {
+				return 0;
+			}
+			return 0;
+		}
+
+		private boolean verticesInCycle(int i, boolean[] visited, boolean[] recStack) {
+
+			// Mark the current node as visited and
+			// part of recursion stack
+			if (recStack[i])
+				return true;
+
+			if (visited[i])
+				return false;
+
+			visited[i] = true;
+
+			recStack[i] = true;
+			List<Integer> children = adjacencyList.get(i);
+
+			for (Integer c : children)
+				if (verticesInCycle(c, visited, recStack))
+					return true;
+
+			recStack[i] = false;
+
+			return false;
+		}
+
+		private boolean isCyclic() {
+
+			// Mark all the vertices as not visited and
+			// not part of recursion stack
+			boolean[] visited = new boolean[noOfVertices];
+			boolean[] recStack = new boolean[noOfVertices];
+
+			// Call the recursive helper function to
+			// detect cycle in different DFS trees
+			for (int i = 0; i < noOfVertices; i++)
+				if (verticesInCycle(i, visited, recStack))
+					return true;
+
+			return false;
+		}
+
+		private void addEdge(int source, int dest) {
+			List<Integer> sourceList = adjacencyList.get(source);
+			if (!sourceList.contains(dest)) {
+				if (!adjacencyList.get(dest).contains(source)) {
+					noOfEdges = getNoOfEdges() + 1;
+				}
+				sourceList.add(dest);
+			}
+		}
+
+		public int getNoOfEdges() {
+			return noOfEdges;
+		}
 	}
 
 }
